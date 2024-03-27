@@ -31,3 +31,14 @@ body {
     text-wrap: balance;
   }
 }
+
+.solid-line {
+  border-bottom: 1px solid black; /* Adjust thickness and color as needed */
+  width: 100%; /* Adjust the width as needed */
+  margin: 20px 0; /* Adjust margin as needed */
+}
+
+.iconImage{
+  width: 15vh;
+  height: 15vh;
+}
