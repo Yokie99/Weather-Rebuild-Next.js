@@ -5,6 +5,7 @@ import NavbarComponent from "./Components/NavbarComponent";
 import MainWeatherComponent from "./Components/MainWeatherComponent";
 import FiveDayComponent from "./Components/FiveDayComponent";
 import {
+  convertUnixTimeToDayOfWeek,
   convertUnixTimestampTo24Hour,
   getForecast,
   getLocationCoords,
@@ -83,9 +84,12 @@ export default function Home() {
         let convertSunset = convertUnixTimestampTo24Hour(sunset)
         setSSHr(convertSunset.hours)
         setSSMin(convertSunset.minutes)
+
+        convertUnixTimeToDayOfWeek(time)
   },[time])
   return (
-    <div className="bg-blue-400 w-screen h-screen">
+  
+    <div className="bg-blue-400 h-full lg:h-screen text-black">
       <NavbarComponent keydown={setSearchName} />
       <MainWeatherComponent
         desc={desc}
@@ -115,5 +119,6 @@ export default function Home() {
         <FiveDayComponent />
       </div>
     </div>
+
   );
 }

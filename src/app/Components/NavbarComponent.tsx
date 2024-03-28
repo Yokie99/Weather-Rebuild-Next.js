@@ -1,3 +1,5 @@
+'use client'
+
 import { Button, List } from "flowbite-react";
 import sun from "../assets/sun.png";
 import { useState } from "react";

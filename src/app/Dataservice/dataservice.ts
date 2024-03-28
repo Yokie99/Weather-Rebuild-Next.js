@@ -47,3 +47,22 @@ export const convertUnixTimestampTo24Hour = (unixTimestamp:number) => {
     // Return the time in 24-hour format
     return {hours, minutes};
   }
+
+export const convertUnixTimeToDayOfWeek = (unixTime: number) =>{
+    // Convert Unix time (in seconds) to milliseconds
+    const unixTimeMillis = unixTime * 1000;
+
+    // Get the date in Pacific Time
+    const dateInPacificTime = new Date(unixTimeMillis);
+    const utcOffset = -7 * 60 * 60 * 1000; // Pacific Time (PST) is UTC-7
+    const pacificTimeDate = new Date(dateInPacificTime.getTime() + utcOffset);
+
+    // Get the day of the week (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+    const dayOfWeek = pacificTimeDate.getUTCDay();
+
+    // Define an array of day names
+    const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+    // Return the day of the week
+    console.log(dayNames[dayOfWeek]) ;
+}

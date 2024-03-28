@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect } from 'react'
 import up from '../assets/up_arrow.png'
 import upBlock from '../assets/up_arrow_block.png'
@@ -69,30 +70,30 @@ const MainWeatherComponent = (props: MainWeatherComponentProps) => {
 
                     <div className='grid grid-rows-3 justify-center'>
                         <div className='flex justify-between align-middle items-center max-w-48'>
-                            <Image className='pe-4' src={upBlock} alt="" />
+                            <Image className='pe-4 icons' src={upBlock} alt="" />
                             <p>High: {props.tempMax}°F</p>
                         </div>
                         <div className='flex justify-between align-middle items-center max-w-48'>
-                            <Image className='pe-4' src={downBlock} alt="" />
+                            <Image className='pe-4 icons' src={downBlock} alt="" />
                             <p>Low: {props.tempMin}°F</p>
                         </div>
                         <div className='flex justify-between align-middle items-center max-w-48'>
-                            <Image className='pe-4' src={water} alt="" />
+                            <Image className='pe-4 icons' src={water} alt="" />
                             <p>Humidity: {props.humidity}</p>
                         </div>
 
                     </div>
                     <div className='grid grid-rows-3 justify-center'>
                         <div className='flex justify-between align-middle items-center max-w-48'>
-                            <Image className='pe-4' src={wind} alt="" />
+                            <Image className='pe-4 icons' src={wind} alt="" />
                             <p>Wind: {props.windSpd}mph</p>
                         </div>
                         <div className='flex justify-between align-middle items-center max-w-48'>
-                            <Image className='pe-4' src={up} alt="" />
+                            <Image className='pe-4 icons' src={up} alt="" />
                             <p>Sunrise: {props.SRHr}:{props.SRMin}</p>
                         </div>
                         <div className='flex justify-between align-middle items-center max-w-48'>
-                            <Image className='pe-4' src={down} alt="" />
+                            <Image className='pe-4 icons' src={down} alt="" />
                             <p>Sunset: {props.SSHr}:{props.SSMin}</p>
                         </div>
 

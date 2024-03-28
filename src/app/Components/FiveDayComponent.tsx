@@ -1,3 +1,4 @@
+'use client'
 import React from "react";
 import upBlock from "../assets/up_arrow_block.png";
 import downBlock from "../assets/down_arrow_block.png";
@@ -14,7 +15,7 @@ const FiveDayComponent = () => {
 
         <div className="flex align-middle items-center p-6 text-3xl">
           <div className="flex ">
-            <Image className="pe-4" src={upBlock} alt="" />
+            <Image className="pe-4 icons" src={upBlock} alt="" />
             <p>High:</p>
           </div>
           <p>69F</p>
@@ -22,7 +23,7 @@ const FiveDayComponent = () => {
         </div>
         <div className="flex align-middle items-center text-3xl pb-10">
           <div className="flex">
-            <Image className="pe-4" src={downBlock} alt="" />
+            <Image className="pe-4 icons" src={downBlock} alt="" />
             <p>Low:</p>
           </div>
           <p>69F</p>
