@@ -10,6 +10,7 @@ import star from '../assets/star_unfilled.png'
 import { roundUp } from '../Dataservice/dataservice'
 
 import Image from 'next/image'
+import { getlocalStorage, removeFromLocalStorage, saveToLocalStorage } from '../Dataservice/localstorage'
 
 
 interface MainWeatherComponentProps{
@@ -37,8 +38,19 @@ interface MainWeatherComponentProps{
 }
 
 const MainWeatherComponent = (props: MainWeatherComponentProps) => {
-
-
+    
+    const handleFavClick = () =>{
+        let localstorage = getlocalStorage();
+        console.log("I have been clicked")
+        localstorage.map((city: string) =>{
+            if(city == props.cityName){
+                removeFromLocalStorage(city)
+            }
+            else{
+                saveToLocalStorage(props.cityName)
+            }
+        })
+    }
 
     return (
         <div className='bg-blue-400 w-screen pt-[5rem] pb-12'>
@@ -53,7 +65,7 @@ const MainWeatherComponent = (props: MainWeatherComponentProps) => {
                     <p className='text-3xl'>{props.date}</p>
                 </div>
 
-                <Image width={50} height={900} className='object-contain' src={star} alt="" />
+                <Image width={50} height={900} onClick={handleFavClick} className='object-contain' src={star} alt="" />
             </div>
 
             <div className='bg-white border-black border-solid border-[3px] mx-16'>

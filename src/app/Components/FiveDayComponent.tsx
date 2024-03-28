@@ -19,7 +19,7 @@ if(props.forcastArr.length == 8){
   dayofWeek = convertUnixTimeToDayOfWeek(props.forcastArr[3].dt)
 }
 
- console.log(props.forcastArr)
+//  console.log(props.forcastArr)
 let tempMax = 0
 if(props.forcastArr){
   for(let i = 0; props.forcastArr?.length > i; i++){

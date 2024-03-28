@@ -64,7 +64,7 @@ export const convertUnixTimeToDayOfWeek = (unixTime: number) =>{
     const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
     // Return the day of the week
-    console.log(dayNames[dayOfWeek]) ;
+    // console.log(dayNames[dayOfWeek]) ;
     return(dayNames[dayOfWeek])
 }
 

@@ -5,11 +5,6 @@ export interface ILocation{
     name:string
     
 }
-
-
-
-
-
 export interface ICurrentWeather {
   dt: number,
     main: {
@@ -36,12 +31,6 @@ export interface ICurrentWeather {
     icon: string;
   }
   
-  
-  interface Coord {
-    lat: number;
-    lon: number;
-  }
-
   export interface IForcast { 
     list: List[]
   }

@@ -2,8 +2,9 @@
 
 import { Button, List } from "flowbite-react";
 import sun from "../assets/sun.png";
-import { useState } from "react";
+import { Key, useEffect, useState } from "react";
 import Image from "next/image";
+import { getlocalStorage } from "../Dataservice/localstorage";
 
 interface NavbarComponentProps{
   keydown: React.Dispatch<React.SetStateAction<string>>
@@ -21,6 +22,8 @@ function NavbarComponent(props:NavbarComponentProps) {
       props.keydown(inputValue)
     }
   };
+  
+  let localstorage = getlocalStorage();
 
   return (
     <>
@@ -55,7 +58,9 @@ function NavbarComponent(props:NavbarComponentProps) {
 
               <div>
                 <List className=" text-black">
-                  <List.Item>Manteca</List.Item>
+                  {localstorage.map((city: string[], index:number) => (
+                   <List.Item key={index}> {city} </List.Item>
+                  ))}
                 </List>
               </div>
             </div>
