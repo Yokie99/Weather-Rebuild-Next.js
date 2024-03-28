@@ -24,7 +24,7 @@ function NavbarComponent(props:NavbarComponentProps) {
 
   return (
     <>
-      <div className=" bg-gray-400 absolute w-screen">
+      <div className=" bg-gray-400 absolute w-full">
         <div className="grid grid-cols-3 items-center">
           <div className="flex items-center gap-3">
             <Image src={sun} alt="" />

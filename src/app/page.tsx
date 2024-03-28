@@ -6,11 +6,14 @@ import MainWeatherComponent from "./Components/MainWeatherComponent";
 import FiveDayComponent from "./Components/FiveDayComponent";
 import {
   convertUnixTimeToDayOfWeek,
+  convertUnixTimeToPacificDate,
   convertUnixTimestampTo24Hour,
   getForecast,
   getLocationCoords,
   getWeather,
+  separateArrayIntoChunks,
 } from "./Dataservice/dataservice";
+import { IForcast, List } from "./Interfaces/interface";
 
 export default function Home() {
   const [feelsLike, setFeelsLike] = useState<number>(0);
@@ -34,6 +37,53 @@ export default function Home() {
   const [SRMin, setSRMin] = useState<number>(0);
   const [SSHr, setSSHr] = useState<number>(0);
   const [SSMin, setSSMin] = useState<number>(0);
+  const [date, setDate] = useState<string>("")
+
+  const [fiveDayArr, setFiveDayArr] = useState<List[][]>()
+
+  const defaultArr = [
+    {
+        "dt": 1712016000,
+        "main": {
+            "temp": 65.71,
+            "feels_like": 64.09,
+            "temp_min": 65.71,
+            "temp_max": 65.71,
+            "pressure": 1018,
+            "sea_level": 1018,
+            "grnd_level": 1017,
+            "humidity": 45,
+            "temp_kf": 0
+        },
+        "weather": [
+            {
+                "id": 800,
+                "main": "Clear",
+                "description": "clear sky",
+                "icon": "01d"
+            }
+        ],
+        "clouds": {
+            "all": 0
+        },
+        "wind": {
+            "speed": 7.2,
+            "deg": 327,
+            "gust": 8.59
+        },
+        "visibility": 10000,
+        "pop": 0,
+        "sys": {
+            "pod": "d"
+        },
+        "dt_txt": "2024-04-02 00:00:00"
+    }]
+  
+  const [day1Arr, setDay1Arr] = useState<List[]>(defaultArr)
+  const [day2Arr, setDay2Arr] = useState<List[]>(defaultArr)
+  const [day3Arr, setDay3Arr] = useState<List[]>(defaultArr)
+  const [day4Arr, setDay4Arr] = useState<List[]>(defaultArr)
+  const [day5Arr, setDay5Arr] = useState<List[]>(defaultArr)
 
   // const [lat, setLat] = useState<number>(10)
   // const [lon, setLon]= useState<number>(10)
@@ -41,7 +91,7 @@ export default function Home() {
   useEffect(() => {
     const getCurrent = async (lat: number, lon: number) => {
       const fetchedData = await getWeather(lat, lon);
-      console.log(fetchedData);
+      // console.log(fetchedData);
 
       setDesc(fetchedData.weather[0].description);
       setFeelsLike(fetchedData.main.feels_like);
@@ -65,7 +115,30 @@ export default function Home() {
         setCountryName(fetchedlocation[0].country);
         getCurrent(fetchedlocation[0].lat, fetchedlocation[0].lon);
         
-        getForecast(fetchedlocation[0].lat, fetchedlocation[0].lon);
+        let forcast = getForecast(fetchedlocation[0].lat, fetchedlocation[0].lon);
+        const chunkedArrays = separateArrayIntoChunks((await forcast).list, 8)
+        setFiveDayArr(chunkedArrays)
+        chunkedArrays.forEach((chunk, index) => {
+          switch(index+1) {
+            case 1:
+              setDay1Arr(chunk)
+              break;
+            case 2:
+              setDay2Arr(chunk)
+              break;
+            case 3:
+              setDay3Arr(chunk)
+              break;
+            case 4:
+              setDay4Arr(chunk)
+              break;
+            case 5:
+              setDay5Arr(chunk)
+              break;
+            default:
+              break;
+          }
+      });
       } else {
         alert("You have entered a place that does not exist!");
       }
@@ -85,11 +158,13 @@ export default function Home() {
         setSSHr(convertSunset.hours)
         setSSMin(convertSunset.minutes)
 
+        setDate(convertUnixTimeToPacificDate(time))
+
         convertUnixTimeToDayOfWeek(time)
   },[time])
   return (
   
-    <div className="bg-blue-400 h-full lg:h-screen text-black">
+    <div className="bg-blue-400 h-full lg:h-screen w-screen text-black">
       <NavbarComponent keydown={setSearchName} />
       <MainWeatherComponent
         desc={desc}
@@ -104,6 +179,7 @@ export default function Home() {
         SRMin={SRMin}
         SSHr={SSHr}
         SSMin={SSMin}
+        date={date}
         
         currentHour={currentHour}
         currentMin={currentMin}
@@ -112,11 +188,11 @@ export default function Home() {
         countryName={countryName}
       />
       <div className="mx-16 grid grid-cols-5">
-        <FiveDayComponent />
-        <FiveDayComponent />
-        <FiveDayComponent />
-        <FiveDayComponent />
-        <FiveDayComponent />
+        <FiveDayComponent forcastArr={day1Arr}/>
+        <FiveDayComponent forcastArr={day2Arr}/>
+        <FiveDayComponent forcastArr={day3Arr}/>
+        <FiveDayComponent forcastArr={day4Arr}/>
+        <FiveDayComponent forcastArr={day5Arr}/>
       </div>
     </div>
 

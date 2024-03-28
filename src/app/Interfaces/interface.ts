@@ -46,7 +46,8 @@ export interface ICurrentWeather {
     list: List[]
   }
 
-  interface List{
+  export interface List{
+    dt:number,
     main: {
       temp_max:number,
       temp_min:number,

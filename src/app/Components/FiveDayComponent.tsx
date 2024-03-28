@@ -1,32 +1,66 @@
 'use client'
-import React from "react";
+import React, { useState } from "react";
 import upBlock from "../assets/up_arrow_block.png";
 import downBlock from "../assets/down_arrow_block.png";
 import sun from "../assets/sun.png";
 import Image from "next/image";
+import { List } from "../Interfaces/interface";
+import { convertUnixTimeToDayOfWeek, roundUp} from "../Dataservice/dataservice";
 
-const FiveDayComponent = () => {
+
+interface FiveDayComponentProps {
+ forcastArr: List[]
+}
+const FiveDayComponent = (props: FiveDayComponentProps) => {
+let icon = "01d"
+let dayofWeek = "XXXX"
+if(props.forcastArr.length == 8){
+  icon = props.forcastArr[0].weather[0].icon
+  dayofWeek = convertUnixTimeToDayOfWeek(props.forcastArr[3].dt)
+}
+
+ console.log(props.forcastArr)
+let tempMax = 0
+if(props.forcastArr){
+  for(let i = 0; props.forcastArr?.length > i; i++){
+    if(props.forcastArr[i].main.temp_max > tempMax){
+      tempMax = props.forcastArr[i].main.temp_max
+    }
+  }
+}
+  
+
+let tempMin = 9999
+if(props.forcastArr){
+  for(let i = 0; props.forcastArr?.length > i; i++){
+    if(props.forcastArr[i].main.temp_min < tempMin){
+      tempMin = props.forcastArr[i].main.temp_min
+    }
+  }
+}
+
+  
   return (
     <>
-      <div className="bg-white flex flex-col justify-center items-center border-black border-4 pt-10">
-        <h1 className="text-4xl pb-5">Day of the week</h1>
-        <Image className="iconImage" src={sun} alt="" />
+      <div className="bg-white flex flex-col justify-center items-center border-black border-4 pt-10  max-w-screen">
+        <h1 className="text-4xl pb-5">{dayofWeek}</h1>
+        <img  className='iconImage' src={`https://openweathermap.org/img/wn/${icon}@2x.png`} alt="" />
 
 
-        <div className="flex align-middle items-center p-6 text-3xl">
+        <div className="flex align-middle items-center p-6 text-2xl">
           <div className="flex ">
             <Image className="pe-4 icons" src={upBlock} alt="" />
             <p>High:</p>
           </div>
-          <p>69F</p>
+          <p>{roundUp(tempMax)}°F</p>
           
         </div>
-        <div className="flex align-middle items-center text-3xl pb-10">
+        <div className="flex align-middle items-center text-2xl pb-10">
           <div className="flex">
             <Image className="pe-4 icons" src={downBlock} alt="" />
             <p>Low:</p>
           </div>
-          <p>69F</p>
+          <p>{roundUp(tempMin)}°F</p>
           
         </div>
         

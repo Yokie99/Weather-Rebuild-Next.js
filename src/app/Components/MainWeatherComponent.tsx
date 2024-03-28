@@ -7,7 +7,7 @@ import downBlock from '../assets/down_arrow_block.png'
 import water from '../assets/water_drop.png'
 import wind from '../assets/wind.png'
 import star from '../assets/star_unfilled.png'
-import { getLocationCoords } from '../Dataservice/dataservice'
+import { roundUp } from '../Dataservice/dataservice'
 
 import Image from 'next/image'
 
@@ -26,6 +26,7 @@ interface MainWeatherComponentProps{
     SRMin:number,
     SSHr:number,
     SSMin:number,
+    date:string,
 
 
     cityName: string,
@@ -49,7 +50,7 @@ const MainWeatherComponent = (props: MainWeatherComponentProps) => {
 
                 <div className='text-center'>
                     <h1 className='text-5xl'>{props.cityName},{props.countryName}</h1>
-                    <p className='text-3xl'>Mon, March 25, 2024</p>
+                    <p className='text-3xl'>{props.date}</p>
                 </div>
 
                 <Image width={50} height={900} className='object-contain' src={star} alt="" />
@@ -64,18 +65,18 @@ const MainWeatherComponent = (props: MainWeatherComponentProps) => {
                     </div>
 
                     <div className='flex flex-col items-center justify-center'>
-                        <p className=' text-8xl'>{props.temp}°F</p>
-                        <p className='text-3xl'>Feels Like {props.feelsLike}°F</p>
+                        <p className=' text-8xl'>{roundUp(props.temp)}°F</p>
+                        <p className='text-3xl'>Feels Like {roundUp(props.feelsLike)}°F</p>
                     </div>
 
                     <div className='grid grid-rows-3 justify-center'>
                         <div className='flex justify-between align-middle items-center max-w-48'>
                             <Image className='pe-4 icons' src={upBlock} alt="" />
-                            <p>High: {props.tempMax}°F</p>
+                            <p>High: {roundUp(props.tempMax)}°F</p>
                         </div>
                         <div className='flex justify-between align-middle items-center max-w-48'>
                             <Image className='pe-4 icons' src={downBlock} alt="" />
-                            <p>Low: {props.tempMin}°F</p>
+                            <p>Low: {roundUp(props.tempMin)}°F</p>
                         </div>
                         <div className='flex justify-between align-middle items-center max-w-48'>
                             <Image className='pe-4 icons' src={water} alt="" />

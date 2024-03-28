@@ -1,4 +1,4 @@
-import { ICurrentWeather, ILocation } from "../Interfaces/interface"
+import { ICurrentWeather, IForcast, ILocation } from "../Interfaces/interface"
 import APIKey from "../environment/environment"
 
 // let city = "manteca"
@@ -28,8 +28,8 @@ export const getLocationCoords = async (city:string) =>{
 
 export const getForecast = async (lat:number, lon:number) => {
     const promise = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APIKey}&units=${units}`)
-    const data = await promise.json();
-    console.log(data)
+    const data:IForcast = await promise.json();
+    return data
 }
 
 export const convertUnixTimestampTo24Hour = (unixTimestamp:number) => {
@@ -65,4 +65,47 @@ export const convertUnixTimeToDayOfWeek = (unixTime: number) =>{
 
     // Return the day of the week
     console.log(dayNames[dayOfWeek]) ;
+    return(dayNames[dayOfWeek])
+}
+
+export function convertUnixTimeToPacificDate(unixTime: number): string{
+    // Convert Unix time (in seconds) to milliseconds
+    const unixTimeMillis = unixTime * 1000;
+
+    // Get the date in Pacific Time
+    const dateInPacificTime = new Date(unixTimeMillis);
+    const utcOffset = -7 * 60 * 60 * 1000; // Pacific Time (PST) is UTC-7
+    const pacificTimeDate = new Date(dateInPacificTime.getTime() + utcOffset);
+
+    // Define arrays for month names and day names
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+    // Extract day, month, and year
+    const dayOfWeek = pacificTimeDate.getUTCDay();
+    const month = pacificTimeDate.getUTCMonth();
+    const dayOfMonth = pacificTimeDate.getUTCDate();
+    const year = pacificTimeDate.getUTCFullYear();
+
+    // Format the date string
+    const formattedDate = `${dayNames[dayOfWeek]}, ${monthNames[month]} ${dayOfMonth}, ${year}`;
+
+    return formattedDate;
+}
+
+export function separateArrayIntoChunks<T>(array: T[], chunkSize: number): T[][] {
+    const chunks: T[][] = [];
+    for (let i = 0; i < array.length; i += chunkSize) {
+        chunks.push(array.slice(i, i + chunkSize));
+    }
+    return chunks;
+}
+
+export function roundUp(num: number): number {
+    const decimal = num - Math.floor(num);
+    if (decimal >= 0.5) {
+        return Math.ceil(num);
+    } else {
+        return Math.floor(num);
+    }
 }
