@@ -32,6 +32,13 @@ body {
   }
 }
 
+@font-face {
+  font-family: 'Amaranth';
+  src: url('./Fonts/Amaranth-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .solid-line {
   border-bottom: 1px solid black; /* Adjust thickness and color as needed */
   width: 100%; /* Adjust the width as needed */

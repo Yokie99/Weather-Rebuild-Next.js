@@ -169,7 +169,7 @@ export default function Home() {
   }
   return (
   
-    <div className="bg-[rgb(152,190,236)] min-h-[1vh] h-full lg:h-screen text-black">
+    <div className="bg-[rgb(152,190,236)] min-h-[1vh] h-full lg:h-screen text-black font-[Amaranth]">
       <NavbarComponent keydown={setSearchName} favClicked={favClicked}/>
       <MainWeatherComponent
         desc={desc}
