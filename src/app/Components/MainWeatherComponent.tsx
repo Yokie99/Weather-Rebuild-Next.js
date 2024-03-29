@@ -13,43 +13,49 @@ import Image from 'next/image'
 import { getlocalStorage, removeFromLocalStorage, saveToLocalStorage } from '../Dataservice/localstorage'
 
 
-interface MainWeatherComponentProps{
+interface MainWeatherComponentProps {
     desc: string,
-    feelsLike:number,
-    humidity:number,
-    temp:number,
-    tempMax:number,
-    tempMin:number,
-    windSpd:number,
+    feelsLike: number,
+    humidity: number,
+    temp: number,
+    tempMax: number,
+    tempMin: number,
+    windSpd: number,
     icon: string,
-    
-    SRHr:number,
-    SRMin:number,
-    SSHr:number,
-    SSMin:number,
-    date:string,
+
+    SRHr: number,
+    SRMin: number,
+    SSHr: number,
+    SSMin: number,
+    date: string,
 
 
     cityName: string,
-  countryName: string,
-  currentHour:number,
-  currentMin:number
+    countryName: string,
+    currentHour: number,
+    currentMin: number
 
 }
 
 const MainWeatherComponent = (props: MainWeatherComponentProps) => {
-    
-    const handleFavClick = () =>{
+
+    const handleFavClick = () => {
         let localstorage = getlocalStorage();
-        console.log("I have been clicked")
-        localstorage.map((city: string) =>{
-            if(city == props.cityName){
-                removeFromLocalStorage(city)
-            }
-            else{
-                saveToLocalStorage(props.cityName)
-            }
-        })
+        if (localstorage.includes(props.cityName)) {
+            removeFromLocalStorage(props.cityName)
+        } else {
+            saveToLocalStorage(props.cityName)
+        }
+        // localstorage.map((city: string) =>{
+        //     if(city == props.cityName){
+        //         removeFromLocalStorage(city)
+
+        //     }
+        //     else{
+        //         saveToLocalStorage(props.cityName)
+        //     }
+        // })
+
     }
 
     return (
@@ -73,7 +79,7 @@ const MainWeatherComponent = (props: MainWeatherComponentProps) => {
 
                     <div className='flex flex-col items-center justify-center'>
                         <h1 className='text-3xl'>{props.desc}</h1>
-                        <img  className='iconImage' src={`https://openweathermap.org/img/wn/${props.icon}@2x.png`} alt="" />
+                        <img className='iconImage' src={`https://openweathermap.org/img/wn/${props.icon}@2x.png`} alt="" />
                     </div>
 
                     <div className='flex flex-col items-center justify-center'>

@@ -89,25 +89,8 @@ export default function Home() {
   // const [lon, setLon]= useState<number>(10)
 
   useEffect(() => {
-    const getCurrent = async (lat: number, lon: number) => {
-      const fetchedData = await getWeather(lat, lon);
-      // console.log(fetchedData);
-
-      setDesc(fetchedData.weather[0].description);
-      setFeelsLike(fetchedData.main.feels_like);
-      setHumidity(fetchedData.main.humidity);
-      setIcon(fetchedData.weather[0].icon);
-      setTemp(fetchedData.main.temp);
-      setTempMax(fetchedData.main.temp_max);
-      setTempMin(fetchedData.main.temp_min);
-      setWindSpd(fetchedData.wind.speed);
-      setSunrise(fetchedData.sys.sunrise);
-      setSunset(fetchedData.sys.sunset);
-
-      setTime(fetchedData.dt);
-    };
-
     const getLocation = async () => {
+      console.log(searchName)
       const fetchedlocation = await getLocationCoords(searchName);
       console.log(fetchedlocation);
       if (fetchedlocation.length == 1) {
@@ -143,6 +126,26 @@ export default function Home() {
         alert("You have entered a place that does not exist!");
       }
     };
+    
+    const getCurrent = async (lat: number, lon: number) => {
+      const fetchedData = await getWeather(lat, lon);
+      // console.log(fetchedData);
+
+      setDesc(fetchedData.weather[0].description);
+      setFeelsLike(fetchedData.main.feels_like);
+      setHumidity(fetchedData.main.humidity);
+      setIcon(fetchedData.weather[0].icon);
+      setTemp(fetchedData.main.temp);
+      setTempMax(fetchedData.main.temp_max);
+      setTempMin(fetchedData.main.temp_min);
+      setWindSpd(fetchedData.wind.speed);
+      setSunrise(fetchedData.sys.sunrise);
+      setSunset(fetchedData.sys.sunset);
+
+      setTime(fetchedData.dt);
+    };
+
+    
     getLocation();
   }, [searchName]);
 
@@ -162,10 +165,14 @@ export default function Home() {
 
         convertUnixTimeToDayOfWeek(time)
   },[time])
+
+  const favClicked = (newCity:string) =>{
+    setSearchName(newCity)
+  }
   return (
   
     <div className="bg-blue-400 h-full lg:h-screen w-screen text-black">
-      <NavbarComponent keydown={setSearchName} />
+      <NavbarComponent keydown={setSearchName} favClicked={favClicked}/>
       <MainWeatherComponent
         desc={desc}
         feelsLike={feelsLike}

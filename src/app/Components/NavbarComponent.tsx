@@ -8,6 +8,7 @@ import { getlocalStorage } from "../Dataservice/localstorage";
 
 interface NavbarComponentProps{
   keydown: React.Dispatch<React.SetStateAction<string>>
+  favClicked: (newCity:string)=> void
   
 }
 
@@ -23,7 +24,12 @@ function NavbarComponent(props:NavbarComponentProps) {
     }
   };
   
+  const nameClick = (city:string) =>{
+    props.favClicked(city);
+    setOpenFav(false)
+  }
   let localstorage = getlocalStorage();
+ 
 
   return (
     <>
@@ -58,8 +64,8 @@ function NavbarComponent(props:NavbarComponentProps) {
 
               <div>
                 <List className=" text-black">
-                  {localstorage.map((city: string[], index:number) => (
-                   <List.Item key={index}> {city} </List.Item>
+                  {localstorage.map((city: string, index:number) => (
+                   <List.Item onClick={()=>nameClick(city)} key={index}> {city} </List.Item>
                   ))}
                 </List>
               </div>
