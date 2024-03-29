@@ -42,14 +42,14 @@ if(props.forcastArr){
   
   return (
     <>
-      <div className="bg-white flex flex-col justify-center items-center border-black border-4 pt-10  max-w-screen">
+      <div className="bg-white flex flex-col justify-center items-center border-black border-4 pt-10 max-w-screen">
         <h1 className="text-4xl pb-5">{dayofWeek}</h1>
         <img  className='iconImage' src={`https://openweathermap.org/img/wn/${icon}@2x.png`} alt="" />
 
 
         <div className="flex align-middle items-center p-6 text-2xl">
           <div className="flex ">
-            <Image className="pe-4 icons" src={upBlock} alt="" />
+            <Image className="pe-4 smallScreenIcons lg:w-[2.5vw] lg:h-[2vw]" src={upBlock} alt="" />
             <p>High:</p>
           </div>
           <p>{roundUp(tempMax)}°F</p>
@@ -57,7 +57,7 @@ if(props.forcastArr){
         </div>
         <div className="flex align-middle items-center text-2xl pb-10">
           <div className="flex">
-            <Image className="pe-4 icons" src={downBlock} alt="" />
+            <Image className="pe-4 smallScreenIcons lg:w-[2.5vw] lg:h-[2vw]" src={downBlock} alt="" />
             <p>Low:</p>
           </div>
           <p>{roundUp(tempMin)}°F</p>

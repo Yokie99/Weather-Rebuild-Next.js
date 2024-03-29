@@ -171,7 +171,7 @@ export default function Home() {
   }
   return (
   
-    <div className="bg-blue-400 h-full lg:h-screen w-screen text-black">
+    <div className="bg-[rgb(152,190,236)]  h-full lg:h-screen text-black">
       <NavbarComponent keydown={setSearchName} favClicked={favClicked}/>
       <MainWeatherComponent
         desc={desc}
@@ -194,7 +194,7 @@ export default function Home() {
         cityName={cityName}
         countryName={countryName}
       />
-      <div className="mx-16 grid grid-cols-5">
+      <div className="mx-4 lg:mx-16 grid grid-cols-1  lg:grid-cols-5">
         <FiveDayComponent forcastArr={day1Arr}/>
         <FiveDayComponent forcastArr={day2Arr}/>
         <FiveDayComponent forcastArr={day3Arr}/>
