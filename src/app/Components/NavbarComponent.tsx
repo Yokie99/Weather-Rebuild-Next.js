@@ -33,7 +33,7 @@ function NavbarComponent(props:NavbarComponentProps) {
 
   return (
     <>
-      <div className=" bg-[rgb(117,114,238)] absolute w-full">
+      <div className=" bg-[rgb(117,114,238)] absolute w-full px-4">
         <div className="grid grid-cols-3 items-center">
           <div className="flex items-center gap-3">
             <Image src={sun} alt="" />
@@ -51,7 +51,7 @@ function NavbarComponent(props:NavbarComponentProps) {
           </div>
 
           <div className="justify-end flex">
-            <Button onClick={()=>setOpenFav(!openFav)} className=" max-w-20 ">Default</Button>
+            <Button onClick={()=>setOpenFav(!openFav)} className="">{openFav? "Close": "Open Favorites"}</Button>
           </div>
         </div>
         {openFav ? (
@@ -59,13 +59,13 @@ function NavbarComponent(props:NavbarComponentProps) {
             {/* do not remove empty div below! */}
             <div></div>
 
-            <div className="grid grid-rows-2">
-              <h1 className="solid-line text-center ">Favorites</h1>
-
+            <div className="">
+                <h1 className="solid-line text-center text-2xl py-3">Favorites</h1>
+           
               <div>
-                <List className=" text-black">
+                <List className=" text-black text-2xl py-3">
                   {localstorage.map((city: string, index:number) => (
-                   <List.Item onClick={()=>nameClick(city)} key={index}> {city} </List.Item>
+                   <List.Item className="cursor-pointer hover:text-white" onClick={()=>nameClick(city)} key={index}> {city} </List.Item>
                   ))}
                 </List>
               </div>
