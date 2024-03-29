@@ -17,8 +17,8 @@ Vercel Link: https://weather-rebuild-next-js.vercel.app/
     - 3/29: Saving a favorite currently saves a string of the name and country. I will either need to save the lat and lon or a state code as well to correctly redisplay the same location. 
         - Responsivness would use some work at the smaller mobile sizes
     
-## Peer Reviewer: 
-## Review: 
+## Peer Reviewer: Caleb Sylvia
+## Review: Site is super simple and clean, I really enjoy all the colors and the simplicity of the app. One thing is the little black bar that is on the bottom, I don't know if that is from margin or padding or if its supposed to be there but that is probably the only thing I can say is off. Great Job!
 
 
 
