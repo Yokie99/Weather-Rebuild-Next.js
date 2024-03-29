@@ -2,7 +2,7 @@
 
 import { Button, List } from "flowbite-react";
 import sun from "../assets/sun.png";
-import { Key, useEffect, useState } from "react";
+import {useEffect, useState } from "react";
 import Image from "next/image";
 import { getlocalStorage } from "../Dataservice/localstorage";
 

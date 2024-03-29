@@ -13,6 +13,7 @@ const saveToLocalStorage = (city:string) => {
 }
 
 const getlocalStorage = () => {
+    if (typeof localStorage !== "undefined") {
     //Getting our values from local storage
     let localStorageData = localStorage.getItem("Favorites");
 
@@ -22,6 +23,7 @@ const getlocalStorage = () => {
     }
     // We return an array of local storage.
     return JSON.parse(localStorageData);
+}
 
 }
 
