@@ -1,7 +1,7 @@
 import { ICurrentWeather, IForcast, ILocation } from "../Interfaces/interface"
 
 // let city = "manteca"
-let APIKey = process.env.NEXT_PUBLIC_ACCESS_API_Key;
+let APIKey = process.env.NEXT_PUBLIC_API_Key;
 // let lat = "37.9577";
 // let lon = "-121.2908";
 let units = "imperial";
