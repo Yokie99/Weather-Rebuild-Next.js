@@ -13,8 +13,12 @@ Mobile and Desktop versions must be built out
 
 Vercel Link: https://weather-rebuild-next-js.vercel.app/
 
-Peer Reviewer: 
-Review: 
+## Notes from the Developeer 
+    - 3/29: Saving a favorite currently saves a string of the name and country. I will either need to save the lat and lon or a state code as well to correctly redisplay the same location. 
+        - Responsivness would use some work at the smaller mobile sizes
+    
+## Peer Reviewer: 
+## Review: 
 
 
 
