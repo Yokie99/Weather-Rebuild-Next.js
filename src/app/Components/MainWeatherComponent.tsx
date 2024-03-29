@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import up from '../assets/up_arrow.png'
 import upBlock from '../assets/up_arrow_block.png'
 import down from '../assets/down_arrow.png'
@@ -7,6 +7,7 @@ import downBlock from '../assets/down_arrow_block.png'
 import water from '../assets/water_drop.png'
 import wind from '../assets/wind.png'
 import star from '../assets/star_unfilled.png'
+import starFilled from '../assets/star_filled-.png'
 import { roundUp } from '../Dataservice/dataservice'
 
 import Image from 'next/image'
@@ -39,12 +40,19 @@ interface MainWeatherComponentProps {
 
 const MainWeatherComponent = (props: MainWeatherComponentProps) => {
 
+    const [isFav, setIsFav] = useState<boolean>(false)
+    useEffect(()=>{
+        
+    },[isFav])
+
     const handleFavClick = () => {
         let localstorage = getlocalStorage();
         if (localstorage.includes(props.cityName)) {
             removeFromLocalStorage(props.cityName)
+            setIsFav(false)
         } else {
             saveToLocalStorage(props.cityName)
+            setIsFav(true)
         }
         // localstorage.map((city: string) =>{
         //     if(city == props.cityName){
@@ -70,8 +78,10 @@ const MainWeatherComponent = (props: MainWeatherComponentProps) => {
                     <h1 className='text-5xl'>{props.cityName},{props.countryName}</h1>
                     <p className='text-3xl'>{props.date}</p>
                 </div>
-
-                <Image width={50} height={900} onClick={handleFavClick} className='object-contain' src={star} alt="" />
+                {isFav ? <Image width={50} height={900} onClick={handleFavClick} className='object-contain' src={starFilled} alt="" />
+                :<Image width={50} height={900} onClick={handleFavClick} className='object-contain' src={star} alt="" />
+                }
+                
             </div>
 
             <div className='bg-white border-black border-solid border-[3px] mx-16'>
@@ -79,6 +89,7 @@ const MainWeatherComponent = (props: MainWeatherComponentProps) => {
 
                     <div className='flex flex-col items-center justify-center'>
                         <h1 className='text-3xl'>{props.desc}</h1>
+                        
                         <img className='iconImage' src={`https://openweathermap.org/img/wn/${props.icon}@2x.png`} alt="" />
                     </div>
 
