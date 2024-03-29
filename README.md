@@ -1,3 +1,25 @@
+Kyle Yok Eyh Ma
+3/29/24
+Weather App Rebuild in Next.js
+
+Rebuild your weather app
+Requirements:
+
+Use your original figma design
+Built in React TypeScript / Next.JS
+Must have a component folder ( App cannot be built in the app.js or in the index.js)
+TailWind or Bootstrap
+Mobile and Desktop versions must be built out
+
+Vercel Link: https://weather-rebuild-next-js.vercel.app/
+
+Peer Reviewer: 
+Review: 
+
+
+
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
