@@ -5,6 +5,7 @@ import NavbarComponent from "./Components/NavbarComponent";
 import MainWeatherComponent from "./Components/MainWeatherComponent";
 import FiveDayComponent from "./Components/FiveDayComponent";
 import {
+  GetLocation,
   convertUnixTimeToDayOfWeek,
   convertUnixTimeToPacificDate,
   convertUnixTimestampTo24Hour,
@@ -27,8 +28,8 @@ export default function Home() {
   const [sunrise, setSunrise] = useState<number>(0);
   const [sunset, setSunset] = useState<number>(0);
 
-  const [searchName, setSearchName] = useState<string>("manteca");
-  const [cityName, setCityName] = useState<string>("");
+  const [searchName, setSearchName] = useState<string>("hong kong");
+  const [cityName, setCityName] = useState<string>("hong kong");
   const [countryName, setCountryName] = useState<string>("");
   const [time, setTime] = useState<number>(9999);
   const [currentHour, setCurrentHour] = useState<number>(0);
@@ -85,6 +86,30 @@ export default function Home() {
 
   // const [lat, setLat] = useState<number>(10)
   // const [lon, setLon]= useState<number>(10)
+  
+    // const onload = async ()=>{
+    //   const onCoords = await GetLocation()
+    //   console.log(onCoords)
+    //   const fetchedData = await getWeather(onCoords.lat, onCoords.lon);
+    //   console.log(fetchedData.name)
+  
+      
+  
+    // }
+    // onload();
+    useEffect(()=>{
+      const onload = async ()=>{
+          const onCoords = await GetLocation()
+          console.log(onCoords)
+          const fetchedData = await getWeather(onCoords.lat, onCoords.lon);
+          // setCityName(fetchedData.name)
+          // setCountryName(fetchedData.sys.country)
+          const newSearch = (`${fetchedData.name}, ${fetchedData.sys.country}`)
+          setSearchName(newSearch)
+        }
+        onload()
+    },[])
+
 
   useEffect(() => {
     const getLocation = async () => {
@@ -167,6 +192,8 @@ export default function Home() {
   const favClicked = (newCity:string) =>{
     setSearchName(newCity)
   }
+
+  
   return (
   
     <div className="bg-[rgb(152,190,236)] min-h-[1vh] h-full lg:h-screen text-black font-[Amaranth]">

@@ -108,3 +108,14 @@ export function roundUp(num: number): number {
         return Math.floor(num);
     }
 }
+
+export const GetLocation = async () => {
+    let lat = 44.34;
+    let lon = 10.99;
+    const position = await new Promise<GeolocationPosition>((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject);
+    });
+    lat = position.coords.latitude;
+    lon = position.coords.longitude;
+    return { lat, lon };
+}

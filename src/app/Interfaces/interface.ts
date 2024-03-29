@@ -20,8 +20,10 @@ export interface ICurrentWeather {
     sys:{
       sunrise:number
       sunset:number
+      country:string
     }
     weather: Weather[]
+    name:string
 
   }
    interface Weather {

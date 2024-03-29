@@ -43,7 +43,7 @@ const MainWeatherComponent = (props: MainWeatherComponentProps) => {
     const [isFav, setIsFav] = useState<boolean>(true)
     useEffect(()=>{
        let localstorage = getlocalStorage();
-       if (localstorage.includes(props.cityName)) {
+       if (localstorage.includes(`${props.cityName}, ${props.countryName}`)) {
         setIsFav(true)
        }
        else{
@@ -53,12 +53,12 @@ const MainWeatherComponent = (props: MainWeatherComponentProps) => {
 
     const handleFavClick = () => {
         let localstorage = getlocalStorage();
-        if (localstorage.includes(props.cityName)) {
-            removeFromLocalStorage(props.cityName)
+        if (localstorage.includes(`${props.cityName}, ${props.countryName}`)) {
+            removeFromLocalStorage(`${props.cityName}, ${props.countryName}`)
             setIsFav(!isFav)
             console.log(isFav)
         } else {
-            saveToLocalStorage(props.cityName)
+            saveToLocalStorage(`${props.cityName}, ${props.countryName}`)
             setIsFav(!isFav)
             console.log(isFav)
         }
