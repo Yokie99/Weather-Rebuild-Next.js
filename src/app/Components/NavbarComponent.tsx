@@ -37,7 +37,7 @@ function NavbarComponent(props:NavbarComponentProps) {
         <div className="grid grid-cols-3 items-center">
           <div className="flex items-center gap-3">
             <Image src={sun} alt="" />
-            <h1>Weather</h1>
+            <h1 className="text-3xl font-bold">Weather</h1>
           </div>
 
           <div className="">

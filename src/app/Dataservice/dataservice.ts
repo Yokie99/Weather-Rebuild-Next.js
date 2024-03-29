@@ -1,8 +1,7 @@
 import { ICurrentWeather, IForcast, ILocation } from "../Interfaces/interface"
-import APIKey from "../environment/environment"
 
 // let city = "manteca"
-let APIkey = APIKey;
+let APIKey = process.env.NEXT_PUBLIC_ACCESS_APIKey;
 // let lat = "37.9577";
 // let lon = "-121.2908";
 let units = "imperial";
@@ -20,7 +19,7 @@ export const getWeather = async (lat:number, lon:number) =>{
 }
 
 export const getLocationCoords = async (city:string) =>{
-    const promise = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city},&limit=1&appid=${APIkey}`)
+    const promise = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city},&limit=1&appid=${APIKey}`)
     const data:ILocation[] = await promise.json();
     // console.log(data[0].country, data[0].name, data[0].lat, data[0].lon);
     return data

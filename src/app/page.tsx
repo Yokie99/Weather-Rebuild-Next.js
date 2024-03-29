@@ -39,8 +39,6 @@ export default function Home() {
   const [SSMin, setSSMin] = useState<number>(0);
   const [date, setDate] = useState<string>("")
 
-  const [fiveDayArr, setFiveDayArr] = useState<List[][]>()
-
   const defaultArr = [
     {
         "dt": 1712016000,
@@ -100,7 +98,7 @@ export default function Home() {
         
         let forcast = getForecast(fetchedlocation[0].lat, fetchedlocation[0].lon);
         const chunkedArrays = separateArrayIntoChunks((await forcast).list, 8)
-        setFiveDayArr(chunkedArrays)
+        
         chunkedArrays.forEach((chunk, index) => {
           switch(index+1) {
             case 1:
@@ -171,7 +169,7 @@ export default function Home() {
   }
   return (
   
-    <div className="bg-[rgb(152,190,236)]  h-full lg:h-screen text-black">
+    <div className="bg-[rgb(152,190,236)] min-h-[1vh] h-full lg:h-screen text-black">
       <NavbarComponent keydown={setSearchName} favClicked={favClicked}/>
       <MainWeatherComponent
         desc={desc}
@@ -194,7 +192,7 @@ export default function Home() {
         cityName={cityName}
         countryName={countryName}
       />
-      <div className="mx-4 lg:mx-16 grid grid-cols-1  lg:grid-cols-5">
+      <div className="mx-4 lg:mx-16 grid grid-cols-1 lg:grid-cols-5  ">
         <FiveDayComponent forcastArr={day1Arr}/>
         <FiveDayComponent forcastArr={day2Arr}/>
         <FiveDayComponent forcastArr={day3Arr}/>

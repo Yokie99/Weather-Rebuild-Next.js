@@ -12,6 +12,7 @@ import { roundUp } from '../Dataservice/dataservice'
 
 import Image from 'next/image'
 import { getlocalStorage, removeFromLocalStorage, saveToLocalStorage } from '../Dataservice/localstorage'
+import { setFips } from 'crypto'
 
 
 interface MainWeatherComponentProps {
@@ -39,20 +40,27 @@ interface MainWeatherComponentProps {
 }
 
 const MainWeatherComponent = (props: MainWeatherComponentProps) => {
-
-    const [isFav, setIsFav] = useState<boolean>(false)
+    const [isFav, setIsFav] = useState<boolean>(true)
     useEffect(()=>{
-        
-    },[isFav])
+       let localstorage = getlocalStorage();
+       if (localstorage.includes(props.cityName)) {
+        setIsFav(true)
+       }
+       else{
+        setIsFav(false)
+       }
+    },[props.cityName])
 
     const handleFavClick = () => {
         let localstorage = getlocalStorage();
         if (localstorage.includes(props.cityName)) {
             removeFromLocalStorage(props.cityName)
-            setIsFav(false)
+            setIsFav(!isFav)
+            console.log(isFav)
         } else {
             saveToLocalStorage(props.cityName)
-            setIsFav(true)
+            setIsFav(!isFav)
+            console.log(isFav)
         }
         // localstorage.map((city: string) =>{
         //     if(city == props.cityName){
